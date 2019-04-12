@@ -25,10 +25,16 @@ contract Building is Ownable {
 
   mapping(address => mapping(uint => bool)) wasOutcomeCompleted;
 
+  event TenantEnrolled(address indexed tenant,
+                       uint period);
+
   event OutcomeAchieved(address indexed tenant,
                         uint period,
                         uint instantCash,
                         uint savingsBonus);
+
+  event TenantGraduated(address indexed tenant,
+                        uint period);
 
   constructor(Token _token,
               uint _instantCashAmount,
@@ -46,6 +52,7 @@ contract Building is Ownable {
 
   function onboardTenant(address tenant) public onlyOwner {
     isTenant[tenant] = true;
+    emit TenantEnrolled(tenant, currentPeriod());
   }
 
   function claimOutcome(uint period, Perk perk) public onlyTenant {
@@ -81,6 +88,7 @@ contract Building is Ownable {
     token.transfer(tenant, tenantSavings[tenant]);
     tenantSavings[tenant] = 0;
     isTenant[tenant] = false;
+    emit TenantGraduated(tenant, currentPeriod());
   }
 
   function getSavings(address tenant) public view returns (uint) {
