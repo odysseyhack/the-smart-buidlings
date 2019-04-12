@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "truffle": "^5.0.12",
     "vue": "^2.6.6"
   },
   "devDependencies": {
