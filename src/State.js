@@ -1,15 +1,17 @@
-let Store = {
+// TODO add logging here
+
+let State = {
   debug: true,
   state: {
-    message: 'Something'
+    message: 'Something',
+    modalVisible: false,
+    modalCb: null
   },
-  get (prop) {
-    if (prop) {
-      return this.state[prop]
-    } else {
-      return this.state
-    }
-    
+  showQuestionModalDialog (cb) {
+    this.modalVisible = true
+    this.modalCb = cb
+    var dialog = document.querySelector('dialog');
+    dialog.showModal();
   },
   setMessageAction (newValue) {
     // if (this.debug) console.log('setMessageAction triggered with', newValue)
@@ -18,7 +20,12 @@ let Store = {
   clearMessageAction () {
     // if (this.debug) console.log('clearMessageAction triggered')
     this.state.message = 'ZXC'
+  },
+  runCallback (choice) {
+    if (this.modalCb) {
+      this.modalCb(choice);
+    }
   }
 }
 
-export default Store
+export default State
