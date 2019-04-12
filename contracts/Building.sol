@@ -9,37 +9,33 @@ contract Building is Ownable {
   using SafeMath for uint;
 
   enum Perk {
-    RENT_DISCOUNT,
+    INSTANT_CASH,
     SAVINGS_BONUS
   }
 
   uint public SECONDS_IN_PERIOD = 100;
 
   Token token;
-  uint rent;
-  uint savingsBonus;
-  uint rentDiscount;
+  uint instantCashAmount;
+  uint savingsBonusAmount;
   uint public creationTime;
 
   mapping(address => bool) isTenant;
   mapping(address => uint) tenantSavings;
 
   mapping(address => mapping(uint => bool)) wasOutcomeCompleted;
-  mapping(address => mapping(uint => uint)) claimedRentDiscount;
 
   event OutcomeAchieved(address indexed tenant,
                         uint period,
-                        uint rentDiscount,
+                        uint instantCash,
                         uint savingsBonus);
 
   constructor(Token _token,
-              uint _rent,
-              uint _rentDiscount,
-              uint _savingsBonus) public {
+              uint _instantCashAmount,
+              uint _savingsBonusAmount) public {
     token = _token;
-    rent = _rent;
-    rentDiscount = _rentDiscount;
-    savingsBonus = _savingsBonus;
+    instantCashAmount = _instantCashAmount;
+    savingsBonusAmount = _savingsBonusAmount;
     creationTime = block.timestamp;
   }
 
@@ -63,26 +59,32 @@ contract Building is Ownable {
 
     wasOutcomeCompleted[tenant][period] = true;
 
-    if (perk == Perk.RENT_DISCOUNT) {
-      claimedRentDiscount[tenant][period] = rentDiscount;
-      emit OutcomeAchieved(tenant, period, rentDiscount, 0);
+    if (perk == Perk.INSTANT_CASH) {
+      require(
+        token.balanceOf(address(this)) >= instantCashAmount,
+        'Not enough building funds');
+
+      token.transfer(tenant, instantCashAmount);
+      emit OutcomeAchieved(tenant, period, instantCashAmount, 0);
     } else {
-      tenantSavings[tenant] += savingsBonus;
-      emit OutcomeAchieved(tenant, period, 0, savingsBonus);
+      tenantSavings[tenant] += savingsBonusAmount;
+      emit OutcomeAchieved(tenant, period, 0, savingsBonusAmount);
     }
+  }
+
+  function cashOut() public onlyTenant {
+    address tenant = msg.sender;
+    require(
+      token.balanceOf(address(this)) >= tenantSavings[tenant],
+      'Not enough building funds');
+
+    token.transfer(tenant, tenantSavings[tenant]);
+    tenantSavings[tenant] = 0;
+    isTenant[tenant] = false;
   }
 
   function getSavings(address tenant) public view returns (uint) {
     return tenantSavings[tenant];
-  }
-
-  function getRent(address tenant, uint period) public view returns (uint) {
-    uint discountedRent = claimedRentDiscount[tenant][period];
-    if (discountedRent > 0) {
-      return discountedRent;
-    } else {
-      return rent;
-    }
   }
 
   function currentPeriod() private view returns (uint) {
