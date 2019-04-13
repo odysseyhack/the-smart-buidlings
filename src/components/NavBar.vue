@@ -27,6 +27,11 @@
               v-bind:class="{selected: selected == 'stats'}"
               href="/stats"
             >Stats</a>
+            <a
+              class="mdl-navigation__link"
+              v-bind:class="{selected: selected == 'onboard'}"
+              href="/onboard"
+            >Onboard</a>            
           </nav>
         </div>
       </div>

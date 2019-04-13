@@ -28,6 +28,7 @@
 
 <script>
 import State from '../State.js'
+import Blockchain from '../Blockchain.js'
 
 export default {
   data () {
@@ -48,9 +49,8 @@ export default {
     },
     showSpendingQuestion () {
       this.state.showQuestionModalDialog(function (choice) {
-        console.log('Choice was made: ' + choice)
+        Blockchain.claim(choice)
       })
-      // TODO
     }
   }
 }

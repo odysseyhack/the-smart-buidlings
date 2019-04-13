@@ -12,9 +12,12 @@
     </table>
 
     <!-- Ruler should be hardcoded -->
+    <span class="ruler-label">Jan 2016</span>
+    <span class="ruler-label">Jul 2016</span>
     <span class="ruler-label">Jan 2017</span>
+    <span class="ruler-label">Jul 2017</span>
     <span class="ruler-label">Jan 2018</span>
-    <span class="ruler-label">Jan 2019</span>
+    <span class="ruler-label">Jul 2018</span>
     <span class="ruler-label">Jan 2019</span>
     <span class="ruler-label">Now</span>
   </div>
@@ -64,6 +67,6 @@ export default {
     width: 90vw;
   }
   .ruler-label {
-    margin-left: 10vw;
+    margin-left: 7vw;
   }
 </style>

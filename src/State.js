@@ -1,11 +1,14 @@
 // TODO add logging here
+// import Blockchain from './Blockchain'
 
 let State = {
   debug: true,
   state: {
     message: 'Something',
     modalVisible: false,
-    modalCb: null
+    modalCb: null,
+    eth: {
+    }  
   },
   showQuestionModalDialog (cb) {
     this.modalVisible = true

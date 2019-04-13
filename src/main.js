@@ -1,8 +1,11 @@
 import Vue from 'vue'
+
 import Voting from './views/Voting.vue'
 import Wallet from './views/Wallet.vue'
 import NotFound from './views/NotFound.vue'
+import OnBoard from './views/OnBoard.vue'
 import Stats from './views/Stats'
+
 import Tooltip from 'vue-directive-tooltip';
 import 'vue-directive-tooltip/css/index.css';
 
@@ -14,7 +17,8 @@ const routes = {
   '/': Wallet,
   '/wallet': Wallet,
   '/stats': Stats,
-  '/voting': Voting
+  '/voting': Voting,
+  '/onboard': OnBoard
 }
 
 new Vue({

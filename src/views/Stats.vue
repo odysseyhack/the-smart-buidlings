@@ -10,11 +10,11 @@
 
 <script>
 import NavBar from '../components/NavBar.vue'
-import aggregateStats from '../AggregateStats.js'
+// import aggregateStats from '../AggregateStats.js'
 
-aggregateStats(tenant => {
-  console.log(tenant);
-});
+// aggregateStats(tenant => {
+//   console.log(tenant);
+// });
 import StatsNumbers from '../components/StatsNumbers.vue'
 import StatsList from '../components/StatsList.vue'
 

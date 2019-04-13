@@ -8,7 +8,7 @@
     <table>
       <tr id="table-row">
         <td>
-          <div @click="choose('saving')" class="choice-button" id="save-choice">
+          <div @click="choose('savings')" class="choice-button" id="save-choice">
             <!-- Add 200GBP to savings -->
             <img class="choice-image" src="../../public/save-icon.png">
             <p>
@@ -17,7 +17,7 @@
           </div>
         </td>
         <td>
-          <div @click="choose('payout')" class="choice-button" id="payout-choice">
+          <div @click="choose('cash')" class="choice-button" id="payout-choice">
             <img class="choice-image" src="../../public/payout-icon.png">
             <p>
               Instant payout 200GBP
