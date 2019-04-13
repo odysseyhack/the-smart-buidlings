@@ -43,7 +43,7 @@ export default {
   computed: {
     claimsOnPeriods () {
       let l = [];
-      for (let i = 1; i < this.periodsNumber; i++) {
+      for (let i = 0; i < this.periodsNumber; i++) {
         let type = 'none' // 'savings', 'cash'
         if (this.details.outcomesDict[i]) {
           type = this.details.outcomesDict[i].choice
@@ -64,7 +64,7 @@ export default {
     },
     livingsOnPeriods () {
       let l = [];
-      for (let i = 1; i < this.periodsNumber; i++) {
+      for (let i = 0; i < this.periodsNumber; i++) {
         l.push({
           period: i,
           lived: this.details.onboarding <= i && !(this.details.graduated < i)
