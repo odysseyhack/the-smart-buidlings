@@ -47,5 +47,21 @@ export default {
   contract() {
     return new ethers.Contract(
       BUILDING_ADDRESS, buildingContractJson.abi, signer);
+  },
+
+  account() {
+    return new Promise((resolve, reject) => {
+      window.web3.eth.getAccounts((err, accounts) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(accounts[0]);
+        }
+      });
+    });
+  },
+
+  resetEventsBlock(fromBlock) {
+    provider.resetEventsBlock(fromBlock);
   }
 }

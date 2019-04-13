@@ -1,17 +1,10 @@
-import { ethers } from 'ethers';
+import Blockchain from './Blockchain';
 
-import buildingContractJson from '../build/contracts/Building.json';
-
-// Ganache
-const BUILDING_ADDRESS = '0x7b6f9bE52C54f675DAF4529742aa0c4D85b9a0eF';
-const FIRST_BLOCK = 0;
+// Rinkeby.
+const FIRST_BLOCK = 4200000;
 
 function listenForTenantUpdates(callback) {
-  let abi = buildingContractJson.abi;
-  let web3Provider = new ethers.providers.Web3Provider(
-    web3.currentProvider);
-
-  let contract = new ethers.Contract(BUILDING_ADDRESS, abi, web3Provider);
+  let contract = Blockchain.contract();
 
   let filterOnboarding = contract.filters.TenantEnrolled();
   let filterOutcomes = contract.filters.OutcomeAchieved();
@@ -20,32 +13,48 @@ function listenForTenantUpdates(callback) {
   let collectedData = {};
 
   contract.on(filterOnboarding, (tenant, period) => {
-    collectedData.tenant = {
+    console.log('onboarding!');
+    if (!collectedData[tenant]) collectedData[tenant] = {};
+
+    Object.assign(collectedData[tenant], {
       address: tenant,
       onboarding: Number(period),
-    };
-    callback(collectedData.tenant);
+    });
+    callback(collectedData[tenant]);
   });
 
-  contract.on(filterOutcomes, (tenant, period, instantCash, savingsBonus) => {
-    if (!collectedData.tenant.outcomes) {
-      collectedData.tenant.outcomes = [];
+  contract.on(filterOutcomes, (tenant, period, instantCash) => {
+    console.log('outcome!');
+    if (!collectedData[tenant]) collectedData[tenant] = {};
+    if (!collectedData[tenant].outcomes) {
+      collectedData[tenant].outcomes = [];
     }
-    collectedData.tenant.outcomes.push({
-      period,
+
+    collectedData[tenant].outcomes.push({
+      period: Number(period),
       choice: (instantCash > 0 ? 'cash' : 'savings')
     });
-    callback(collectedData.tenant);
+
+    // Don't emit events before we get onboarding information.
+    if (collectedData[tenant].onboarding !== undefined) {
+      callback(collectedData[tenant]);
+    }
   });
 
   contract.on(filterGraduation, (tenant, period) => {
-    collectedData.tenant.assign({
+    console.log('graduation');
+    if (!collectedData[tenant]) collectedData[tenant] = {};
+
+    collectedData[tenant].assign({
       graduation: Number(period),
     });
-    callback(collectedData.tenant);
+
+    if (collectedData[tenant].onboarding !== undefined) {
+      callback(collectedData[tenant]);
+    }
   });
 
-  web3Provider.resetEventsBlock(FIRST_BLOCK);
+  Blockchain.resetEventsBlock(FIRST_BLOCK);
 }
 
 export function aggregateStats(callback) {
@@ -90,7 +99,9 @@ export function aggregateStats(callback) {
 
 function mapValuesAverage(m) {
   if (m.size > 0) {
-    return m.values().reduce((a, b) => a + b) / m.size;
+    let sum = 0;
+    for (let v of m.values()) sum += v;
+    return sum / m.size;
   } else {
     return null;
   }

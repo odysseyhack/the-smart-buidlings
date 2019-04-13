@@ -31,7 +31,7 @@
 <script>
 import Blockchain from '../Blockchain.js';
 
-let data = { savings: 88 };
+let data = { savings: null };
 
 let vm = {
   name: 'Balance',
@@ -40,16 +40,14 @@ let vm = {
   },
   methods: {
     updateSavings: async function(newValue) {
-      console.log(`Updating with ${newValue}`);
       data.savings = newValue;
     }
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.web3.eth.getAccounts(async (err, accounts) => {
-    vm.methods.updateSavings(await Blockchain.getSavings(accounts[0]));
-  });
+document.addEventListener('DOMContentLoaded', async () => {
+  vm.methods.updateSavings(
+    await Blockchain.getSavings(await Blockchain.account()));
 }, false);
 
 export default vm;

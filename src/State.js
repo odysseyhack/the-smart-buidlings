@@ -1,61 +1,7 @@
-// import aggregateStats from './AggregateStats'
-
-function aggregateStats(cb) {
-  let tenantsInternal = [
-    {
-      address: '0x123',
-      onboarding: Math.floor(Math.random() * 4) + 1,
-      outcomes: [
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        },
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        },
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        }
-      ]
-    },
-    {
-      address: '0x124',
-      onboarding: Math.floor(Math.random() * 4) + 1,
-      outcomes: [
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        },
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        },
-        {
-          period: Math.floor(Math.random() * 4) + 5,
-          choice: 'savings'
-        }
-      ]
-    },
-  ]
-  for (let tenant of tenantsInternal) {
-    cb({
-      jobsCreated: 10,
-      currentlyEmployed: 12,
-      avgTimeToIndependence: 45,
-      nowIndependent: 12,
-      avgTimeToFindJob: 3,
-      tenant,
-    })
-  }
-}
-
-
-import {pick} from 'lodash'
-
-
 import dialogPolyfill from 'dialog-polyfill';
+import { pick } from 'lodash';
+
+import { aggregateStats } from './AggregateStats';
 
 let State = {
   debug: true,
@@ -82,10 +28,10 @@ let State = {
         return outcomesDict
       }
 
-
       prevThis.state.stats.tenants[update.tenant.address] = update.tenant
       prevThis.state.stats.tenants[update.tenant.address].outcomes =
         getOutcomesDict(update.tenant.outcomes)
+
       prevThis.state.stats.numbers = pick(update, [
         'jobsCreated',
         'currentlyEmployed',
