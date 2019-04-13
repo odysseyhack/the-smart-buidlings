@@ -10,7 +10,9 @@
           claimCell: true, 
           claimCellSaved: claimCell.type == 'saved',
           claimCellCash:  claimCell.type == 'cash'
-          }" >
+          }"
+          v-tooltip="claimCell.text"
+          >
         </div>
         <!-- {{ claimCell.type }} -->
       </td>
@@ -18,7 +20,7 @@
     <tr>
       <td v-for="livedCell in livingsOnPeriods" v-bind:key="livedCell.period">
         <!-- {{ livedCell.lived }} -->
-        <div v-tooltip="'test'" v-bind:class="{
+        <div v-tooltip="'living'" v-bind:class="{
           cell: true,
           livedCell: true, 
           livedCellFilled: livedCell.lived
@@ -43,13 +45,15 @@ export default {
       let l = [];
       for (let i = 1; i < Number(this.periodsNumber); i++) {
         let type = 'saved' // enum : ['saved', 'cash', 'none']
+        let text = 'Tenant had a job'
         // Remove this
         if (this.details.id + i < 7) {
           type = 'none'
         }
         l.push({
           period: i,
-          type
+          type,
+          text
         })
       }
       return l
