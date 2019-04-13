@@ -22,3 +22,5 @@ yarn-error.log*
 
 # Contracts
 /build
+
+secrets.json
