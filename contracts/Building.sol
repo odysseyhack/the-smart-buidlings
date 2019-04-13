@@ -13,7 +13,7 @@ contract Building is Ownable {
     SAVINGS_BONUS
   }
 
-  uint public SECONDS_IN_PERIOD = 100;
+  uint public SECONDS_IN_PERIOD = 1800;
 
   Token token;
   uint instantCashAmount;
@@ -88,6 +88,10 @@ contract Building is Ownable {
     tenantSavings[tenant] = 0;
     isTenant[tenant] = false;
     emit TenantGraduated(tenant, currentPeriod());
+  }
+
+  function isActiveTenant(address addr) public view returns (bool) {
+    return isTenant[addr];
   }
 
   function getSavings(address tenant) public view returns (uint) {

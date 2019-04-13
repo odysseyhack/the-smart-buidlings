@@ -22,6 +22,7 @@ export default {
     if (SPENDING_TYPE[choice] === undefined) {
       throw new Error(`Unknown reward "${choice}"`);
     }
+    console.log(`Claiming "${choice}" (${SPENDING_TYPE[choice]})`);
     await this.contract().claimOutcome(
       this.getCurrentPeriod(), SPENDING_TYPE[choice], { gasLimit: 2000000 });
   },
