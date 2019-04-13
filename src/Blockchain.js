@@ -35,7 +35,7 @@ export default {
   },
 
   async getSavings(tenantAddress) {
-    return await this.contract().getSavings(tenantAddress);
+    return Number(await this.contract().getSavings(tenantAddress));
   },
 
   async getCurrentPeriod() {

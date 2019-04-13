@@ -21,7 +21,7 @@
     ">
       <div class="balancebg">
       <div class="inline"><img src="../../public/payout-icon.png"></div>
-      <div class="inline"><h1>3</h1></div>
+      <div class="inline"><h1>{{ rewards }}</h1></div>
       <p>Bonus rewards</p>
       </div>
     </div>
@@ -38,17 +38,32 @@ let vm = {
   data: function() {
     return data;
   },
+  computed: {
+    rewards: function() {
+      return 3;
+    }
+  },
   methods: {
-    updateSavings: async function(newValue) {
-      data.savings = newValue;
+    async updateSavings() {
+      let savings = await Blockchain.getSavings(await Blockchain.account());
+      data.savings = savings;
     }
   }
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  vm.methods.updateSavings(
-    await Blockchain.getSavings(await Blockchain.account()));
+document.addEventListener('DOMContentLoaded', () => {
+  vm.methods.updateSavings();
 }, false);
+
+(async () => {
+  let contract = Blockchain.contract();
+  let account = await Blockchain.account();
+  let filter = contract.filters.OutcomeAchieved(account);
+
+  contract.on(filter, () => {
+    vm.methods.updateSavings();
+  });
+})();
 
 export default vm;
 </script>
