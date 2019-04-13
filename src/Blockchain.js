@@ -7,8 +7,8 @@ const SPENDING_TYPE = {
   savings: 1
 }
 
-const BUILDING_ADDRESS = '0x66D5d082573dfaA8Fd11178e37B651CeD645A8c4';
-const PERIOD_LENGTH = 100;
+const BUILDING_ADDRESS = '0xe0A5f42f3734e70DfAC74D38A29231EFDf95940A';
+const PERIOD_LENGTH = 1800;
 
 window.ethereum.enable();
 
@@ -22,13 +22,16 @@ export default {
     if (SPENDING_TYPE[choice] === undefined) {
       throw new Error(`Unknown reward "${choice}"`);
     }
-    console.log(`Claiming "${choice}" (${SPENDING_TYPE[choice]})`);
     await this.contract().claimOutcome(
-      this.getCurrentPeriod(), SPENDING_TYPE[choice], { gasLimit: 2000000 });
+      await this.getCurrentPeriod(), SPENDING_TYPE[choice], { gasLimit: 2000000 });
   },
 
   async onboard(address) {
     await this.contract().onboardTenant(address);
+  },
+
+  async isTenant(address) {
+    return await this.contract().isActiveTenant(address);
   },
 
   async getSavings(tenantAddress) {
@@ -36,8 +39,8 @@ export default {
   },
 
   async getCurrentPeriod() {
-    let creationTime = await this.contract().creationTime();
-    let now = new Date();
+    let creationTime = Number(await this.contract().creationTime()) * 1000;
+    let now = Number(new Date());
     return Math.floor((now - creationTime) / (PERIOD_LENGTH * 1000));
   },
 
