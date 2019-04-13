@@ -7,7 +7,7 @@
         v-bind:start="start"
         v-bind:end="end"
         v-bind:details="tenant"
-        periodsNumber="12"
+        v-bind:periodsNumber="periodsNumber"
       />
       
     </table>
@@ -28,6 +28,7 @@
 <script>
 import StatsListElement from './StatsListElement'
 import State from '../State.js'
+import Blockchain from '../Blockchain.js'
 
 State.startEventListening()
 
@@ -50,6 +51,13 @@ export default {
         l.push(Object.assign(this.state.stats.tenants[addr], {id: counter++}))
       }
       return l
+    }
+  },
+  asyncComputed: {
+    async periodsNumber () {
+      let res = await Blockchain.getCurrentPeriod()
+      let res = 20
+      return res
     }
   },
   name: "StatsList",

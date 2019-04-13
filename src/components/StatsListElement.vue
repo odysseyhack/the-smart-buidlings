@@ -8,7 +8,7 @@
         <div v-bind:class="{
           cell: true,
           claimCell: true, 
-          claimCellSaved: claimCell.type == 'saved',
+          claimCellSaved: claimCell.type == 'savings',
           claimCellCash:  claimCell.type == 'cash'
           }"
           v-tooltip="claimCell.text"
@@ -22,7 +22,7 @@
         <!-- {{ livedCell.lived }} -->
         <div v-tooltip="'living'" v-bind:class="{
           cell: true,
-          livedCell: true, 
+          livedCell: true,
           livedCellFilled: livedCell.lived
           }" >
         </div>
@@ -38,18 +38,22 @@ export default {
     details: Object,
     start: String,
     end: String,
-    periodsNumber: String
+    periodsNumber: Number
   },
   computed: {
     claimsOnPeriods () {
       let l = [];
-      for (let i = 1; i < Number(this.periodsNumber); i++) {
-        let type = 'saved' // enum : ['saved', 'cash', 'none']
-        let text = 'Tenant had a job'
-        // Remove this
-        if (this.details.id + i < 7) {
-          type = 'none'
+      for (let i = 1; i < this.periodsNumber; i++) {
+        let type = 'none' // 'savings', 'cash'
+        if (this.details.outcomes[i]) {
+          type = this.details.outcomes[i].choice
         }
+        let text = 'No job confirmation'
+        if (type == 'savings' || type == 'cash') {
+          text = 'Tenant had a job'
+        }
+
+        // Remove this
         l.push({
           period: i,
           type,
@@ -60,10 +64,10 @@ export default {
     },
     livingsOnPeriods () {
       let l = [];
-      for (let i = 1; i < Number(this.periodsNumber); i++) {
+      for (let i = 1; i < this.periodsNumber; i++) {
         l.push({
           period: i,
-          lived: true
+          lived: this.details.onboarding <= i && !(this.details.graduated < i)
         })
       }
       return l
@@ -83,7 +87,7 @@ export default {
     width: 4vw;
   }
   .circled {
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     width: 50px;
     height: 50px;
@@ -94,6 +98,12 @@ export default {
   }
 
   .livedCell {
+    background: white;
+    position: relative;
+    bottom: 9px;
+  }
+
+  .livedCellFilled {
     background: lightseagreen;
     position: relative;
     bottom: 9px;

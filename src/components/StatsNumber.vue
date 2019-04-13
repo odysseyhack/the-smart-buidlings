@@ -7,13 +7,17 @@
       stats-number
     ">
       <h2>{{ number }}</h2>
+      <h5>{{ unit }}</h5>
+      <p>{{ title }}</p>
       </div>
 </template>
 
 <script>
 export default {
   props: {
-    number : String
+    number : Number,
+    title: String,
+    unit: String
   },
   name: "StatsNumber",
 }

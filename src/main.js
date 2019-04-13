@@ -8,11 +8,14 @@ import Stats from './views/Stats'
 // import VuetifyToast from 'vuetify-toast-snackbar'
 
 import Notifications from 'vue-notification'
-
+import AsyncComputed from 'vue-async-computed'
 import Tooltip from 'vue-directive-tooltip';
+
 import 'vue-directive-tooltip/css/index.css';
 import 'dialog-polyfill/dist/dialog-polyfill.css';
 
+ 
+Vue.use(AsyncComputed)
 Vue.use(Tooltip);
 Vue.use(Notifications)
 

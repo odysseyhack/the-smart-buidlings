@@ -7,15 +7,15 @@ function aggregateStats(cb) {
       onboarding: Math.floor(Math.random() * 4) + 1,
       outcomes: [
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         },
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         },
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         }
       ]
@@ -25,15 +25,15 @@ function aggregateStats(cb) {
       onboarding: Math.floor(Math.random() * 4) + 1,
       outcomes: [
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         },
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         },
         {
-          period: Math.floor(Math.random() * 4) + 1,
+          period: Math.floor(Math.random() * 4) + 5,
           choice: 'savings'
         }
       ]
@@ -74,7 +74,18 @@ let State = {
     let prevThis = this;
     // let numbers = this.numbers
     aggregateStats(function (update) {
+      function getOutcomesDict (outcomeList) {
+        let outcomesDict = {}
+        for (let outcome of outcomeList) {
+          outcomesDict[outcome.period] = outcome
+        }
+        return outcomesDict
+      }
+
+
       prevThis.state.stats.tenants[update.tenant.address] = update.tenant
+      prevThis.state.stats.tenants[update.tenant.address].outcomes =
+        getOutcomesDict(update.tenant.outcomes)
       prevThis.state.stats.numbers = pick(update, [
         'jobsCreated',
         'currentlyEmployed',
