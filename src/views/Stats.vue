@@ -2,7 +2,8 @@
   <div id="app">
     <NavBar selected="stats"/>
     <div id="chart">
-      Chart will be here
+      <StatsNumbers />
+      <StatsList />
     </div>
   </div>
 </template>
@@ -14,11 +15,15 @@ import aggregateStats from '../AggregateStats.js'
 aggregateStats(tenant => {
   console.log(tenant);
 });
+import StatsNumbers from '../components/StatsNumbers.vue'
+import StatsList from '../components/StatsList.vue'
 
 export default {
   name: 'app',
   components: {
-    NavBar
+    NavBar,
+    StatsNumbers,
+    StatsList
   }
 }
 </script>
@@ -32,9 +37,7 @@ export default {
     margin: auto;
     margin-top: 30px;
     width: 1400px;
-    height: 600px;
     min-width: 70vw;
     max-width: 90vw;
-    background: lightcyan;
   }
 </style>

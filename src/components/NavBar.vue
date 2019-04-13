@@ -17,11 +17,11 @@
               v-bind:class="{selected: selected == 'wallet'}"
               href="/wallet"
             >Wallet</a>
-            <a
+            <!-- <a
               class="mdl-navigation__link"
               v-bind:class="{selected: selected == 'voting'}"
               href="/voting"
-            >Voting</a>
+            >Voting</a> -->
             <a
               class="mdl-navigation__link"
               v-bind:class="{selected: selected == 'stats'}"
