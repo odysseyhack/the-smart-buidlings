@@ -64,15 +64,23 @@ export function aggregateStats(callback) {
   let programDuration = new Map();
   let joblessDuration = new Map();
 
-  // TODO claim stats
+  let savingsPeriods = new Set();
+  let cashingsPeriods = new Set();
 
   function update(tenant) {
+    let savingsRate = null;
+    if (savingsPeriods.size + cashingsPeriods.size > 0) {
+      let total = savingsPeriods.size + cashingsPeriods.size;
+      savingsRate = Math.round(100 * (savingsPeriods.size / total));
+    }
+
     callback({
       jobsCreated: allTenantsWithJobs.size,
       currentlyEmployed: curTenantsWithJobs.size,
       avgTimeToIndependence: mapValuesAverage(programDuration),
       nowIndependent: graduatedTenants.size,
       avgTimeToFindJob: mapValuesAverage(joblessDuration),
+      savingsRate,
       tenant,
     });
   }
@@ -85,6 +93,15 @@ export function aggregateStats(callback) {
       let firstJobPeriod = Math.min(...tenant.outcomes.map(o => o.period));
       joblessDuration.set(
         tenant.address, firstJobPeriod - tenant.onboarding + 1);
+
+      for (let outcome of tenant.outcomes) {
+        let id = `${tenant.address}@${outcome.period}`;
+        if (outcome.choice == 'cash') {
+          cashingsPeriods.add(id);
+        } else {
+          savingsPeriods.add(id);
+        }
+      }
     }
 
     if (tenant.graduation) {

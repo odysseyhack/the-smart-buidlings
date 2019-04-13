@@ -20,9 +20,10 @@
       v-bind:number="state.stats.numbers.avgTimeToIndependence"
       unit="months"
       title="Avg time be independent" />
-
-    <!-- TODO implement saved -->
-    <StatsNumber v-bind:number="42" unit="times" title="Saving instead of cashing" />
+    <StatsNumber
+      v-bind:number="state.stats.numbers.savingsRate"
+      unit="percent"
+      title="Saving instead of cashing" />
   </div>
 </template>
 

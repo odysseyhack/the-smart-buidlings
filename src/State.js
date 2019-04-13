@@ -50,7 +50,8 @@ let State = {
         'currentlyEmployed',
         'avgTimeToIndependence',
         'nowIndependent',
-        'avgTimeToFindJob'
+        'avgTimeToFindJob',
+        'savingsRate',
       ]))
     })
   },
