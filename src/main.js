@@ -11,6 +11,7 @@ import Notifications from 'vue-notification'
 
 import Tooltip from 'vue-directive-tooltip';
 import 'vue-directive-tooltip/css/index.css';
+import 'dialog-polyfill/dist/dialog-polyfill.css';
 
 Vue.use(Tooltip);
 Vue.use(Notifications)

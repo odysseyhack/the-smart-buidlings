@@ -1,17 +1,14 @@
 export default {
-  getCurrent () {
-    return 15;
+  toMonth(period) {
+    return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][period % 12];
   },
 
-  toMonth (period) {
-    return "Jan"
+  toYear(period) {
+    return 2019 + Math.floor(period / 12);
   },
 
-  toYear (period) {
-    return 2019
-  },
-
-  toString (period) {
-    return this.toMonth(period) + " " + this.toYear(period)
+  toString(period) {
+    return this.toMonth(period) + " " + this.toYear(period);
   }
 }

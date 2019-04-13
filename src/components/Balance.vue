@@ -7,7 +7,7 @@
       mdl-cell--12-col-phone
     ">
       <img src="../../public/save-icon.png">
-      <h1>€300</h1>
+      <h1>€{{ savings }}</h1>
       <p>Savings</p>
     </div>
     <div class="
@@ -24,9 +24,30 @@
 </template>
 
 <script>
-export default {
-  name: "Balance",
+import Blockchain from '../Blockchain.js';
+
+let data = { savings: 88 };
+
+let vm = {
+  name: 'Balance',
+  data: function() {
+    return data;
+  },
+  methods: {
+    updateSavings: async function(newValue) {
+      console.log(`Updating with ${newValue}`);
+      data.savings = newValue;
+    }
+  }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.web3.eth.getAccounts(async (err, accounts) => {
+    vm.methods.updateSavings(await Blockchain.getSavings(accounts[0]));
+  });
+}, false);
+
+export default vm;
 </script>
 
 <style>

@@ -55,6 +55,8 @@ function aggregateStats(cb) {
 import {pick} from 'lodash'
 
 
+import dialogPolyfill from 'dialog-polyfill';
+
 let State = {
   debug: true,
   state: {
@@ -83,9 +85,10 @@ let State = {
     })
   },
   showQuestionModalDialog (cb) {
-    this.modalVisible = true
-    this.modalCb = cb
-    var dialog = document.querySelector('dialog');
+    this.modalVisible = true;
+    this.modalCb = cb;
+    let dialog = document.querySelector('dialog');
+    dialogPolyfill.registerDialog(dialog);
     dialog.showModal();
   },
   setMessageAction (newValue) {
