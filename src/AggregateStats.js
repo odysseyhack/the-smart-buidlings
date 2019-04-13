@@ -96,6 +96,21 @@ export function aggregateStats(callback) {
   });
 }
 
+export async function listenForHistoryEvents (cb) {
+  let contract = Blockchain.contract();
+  let account = await Blockchain.account();
+  console.log('Account: ' + account)
+  let filterOutcomesForUser = contract.filters.OutcomeAchieved(account);
+
+  contract.on(filterOutcomesForUser, (tenant, period, instantCash) => {
+    console.log('History outcome');
+    cb({
+      period: Number(period),
+      choice: (instantCash > 0 ? 'cash' : 'savings')
+    });
+  });
+}
+
 function mapValuesAverage(m) {
   if (m.size > 0) {
     let sum = 0;

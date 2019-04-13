@@ -1,31 +1,8 @@
-function listenForHistoryEvents (cb) {
-  let events = [
-    {
-      period: 1,
-      choice: 'savings'
-    },
-    {
-      period: 2,
-      choice: 'cash'
-    }
-  ]
-  for (let event of events) {
-    // setTimeout(function () {
-    //   console.log('Calling cb')
-    //   console.log(event)
-    //   // event.q = Date.now()
-    //   cb(event)
-    // }, 5000)
-    cb(event)
-  }
-}
-
-
 import {pick} from 'lodash'
 import Vue from 'vue'
 import dialogPolyfill from 'dialog-polyfill';
 
-import { aggregateStats } from './AggregateStats';
+import { aggregateStats, listenForHistoryEvents } from './AggregateStats';
 
 let State = {
   debug: true,
@@ -44,6 +21,7 @@ let State = {
   startHistoryEventListening () {
     let prevThis = this
     listenForHistoryEvents(function (historyEvent) {
+      console.log(historyEvent)
       // prevThis.state.history[historyEvent.period] = historyEvent
       Vue.set(prevThis.state.history, historyEvent.period, historyEvent)
     })
