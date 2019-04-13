@@ -73,12 +73,20 @@ export default {
 
   td {
     width: 100%;
-    width: 10vw;
+    width: 15vw;
+    padding-top: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.15px;
   }
 
   .pending {
-    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
     padding: 4px;
-    background: lightblue;
+    background: #C9FFFB;
+    font-weight: 500;
   }
+
 </style>

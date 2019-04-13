@@ -1,13 +1,13 @@
 <template>
   <!-- Always shows a header, even in smaller screens. -->
-  <div id="nav-bar">  
+  <div id="nav-bar">
     <!-- TODO fix behaviour for mobile -->
     <!-- <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
     <div class="mdl-layout mdl-layout--fixed-header">
       <div class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Building wallet with social curves</span>
+          <span class="mdl-layout-title">Homelink</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
@@ -31,7 +31,7 @@
               class="mdl-navigation__link"
               v-bind:class="{selected: selected == 'onboard'}"
               href="/onboard"
-            >Onboard</a>            
+            >Onboard</a>
           </nav>
         </div>
       </div>
@@ -70,4 +70,3 @@ export default {
   text-decoration: underline;
 }
 </style>
-

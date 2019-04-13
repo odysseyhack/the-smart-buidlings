@@ -1,9 +1,11 @@
 <template>
   <div class="mdl-grid" id="wallet">
     <div class="mdl-cell mdl-cell--12-col">
+      <h3>Your account</h3>
       <Balance />
     </div>
     <div class="mdl-cell mdl-cell--12-col">
+      <h3>Make a claim</h3>
       <Claims />
     </div>
     <div class="mdl-cell mdl-cell--12-col">
@@ -30,6 +32,11 @@ export default {
 <style scoped>
   * {
     text-align: center;
+    font-family: Rubik !important;
+  }
+
+  h3 {
+    padding-left: 1vw;
+    padding-top:20px;
   }
 </style>
-

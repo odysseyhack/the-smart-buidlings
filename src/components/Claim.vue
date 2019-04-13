@@ -15,7 +15,7 @@
       {{ description }}
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      
+
       <label class="fileContainer">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored claim-button">
           Claim
@@ -76,9 +76,21 @@ export default {
     top: 0;
 }
 
+.claim-button {
+    width: 100px;
+    border-radius: 10px;
+  /*  box-shadow: 0 2px #000; */
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    height: 40px;
+    margin-top: 6px;
+}
+
 .claim-button:hover {
   cursor: pointer;
 }
+
+* {
+  font-family: Rubik !important;
+}
 </style>
-
-

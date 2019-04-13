@@ -1,12 +1,13 @@
 <template>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
-      <h4>History</h4>
+      <h3>Transaction history</h3>
     </div>
     <div class="
       mdl-cell
-      mdl-cell--3-offset-desktop
+      mdl-cell--2-offset-desktop
       mdl-cell--6-col-desktop
+      mdl-cell--1-offset-tablet
       mdl-cell--12-col-tablet
       mdl-cell--12-col-phone
       trasnaction-list">
