@@ -81,8 +81,10 @@ export function aggregateStats(callback) {
     if (tenant.outcomes && tenant.outcomes.length > 0) {
       allTenantsWithJobs.add(tenant.address);
       curTenantsWithJobs.add(tenant.address);
+
+      let firstJobPeriod = Math.min(...tenant.outcomes.map(o => o.period));
       joblessDuration.set(
-        tenant.address, tenant.outcomes[0].period - tenant.onboarding + 1);
+        tenant.address, firstJobPeriod - tenant.onboarding + 1);
     }
 
     if (tenant.graduation) {
