@@ -4,7 +4,7 @@
     <!-- TODO fix behaviour for mobile -->
     <!-- <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
     <div class="mdl-layout mdl-layout--fixed-header">
-      <div class="mdl-layout__header">
+      <div class="mdl-layout__header navbarcolour">
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">Homelink</span>
@@ -67,6 +67,20 @@ export default {
 
 <style scoped>
 .selected {
-  text-decoration: underline;
+ text-decoration: underline;
+}
+
+.mdl-navigation__link {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.mdl-navigation__link:hover {
+  background-color: #114462;
+  transition: 0.3s;
+}
+
+.navbarcolour {
+ background-color: #184E6D !important;
 }
 </style>

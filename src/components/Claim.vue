@@ -1,20 +1,20 @@
 <template>
   <div class="
     mdl-cell
-    mdl-cell--6-col-desktop
+    mdl-cell--4-col-desktop
     mdl-cell--12-col-tablet
     mdl-cell--12-col-phone
     mdl-card
     mdl-shadow--2dp
     claim-card"
   >
-    <div class="mdl-card__title">
+    <img :src="getImgUrl()" width="71px" height="60px" class="headingtitle"/>
+    <div class="mdl-card__title headingtitle">
       <h2 class="mdl-card__title-text">{{ title }}</h2>
     </div>
-    <div class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text claimbody">
       {{ description }}
     </div>
-    <div class="mdl-card__actions mdl-card--border">
 
       <label class="fileContainer">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored claim-button">
@@ -22,7 +22,6 @@
           <input type="file" ref="claimProofFiles" @change="fileLoaded" />
         </button>
       </label>
-    </div>
   </div>
 </template>
 
@@ -39,7 +38,8 @@ export default {
   },
   props: {
     title: String,
-    description: String
+    description: String,
+    img: String,
   },
   methods: {
     fileLoaded () {
@@ -51,6 +51,9 @@ export default {
       this.state.showQuestionModalDialog(function (choice) {
         Blockchain.claim(choice)
       })
+    },
+    getImgUrl () {
+      return require('../../public/' + this.img);
     }
   }
 }
@@ -79,18 +82,48 @@ export default {
 .claim-button {
     width: 100px;
     border-radius: 10px;
-  /*  box-shadow: 0 2px #000; */
+    box-shadow: none;
     font-size: 16px;
     letter-spacing: 0.5px;
-    height: 40px;
+    font-weight: 400;
+    height: 36px;
     margin-top: 6px;
+    text-transform: none;
 }
 
 .claim-button:hover {
   cursor: pointer;
+  background-color: #6879dc;
+  transition: 0.3s;
 }
 
 * {
   font-family: Rubik !important;
 }
+
+.headingtitle {
+  margin: auto;
+}
+
+h2 {
+  font-weight: 400;
+  padding-top: 5px;
+  margin-bottom: -10px;
+}
+
+.claimbody {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #497C99 !important;
+}
+
+.claim-card {
+  box-shadow: none;
+  border-radius: 20px;
+  background: #EDF9FF;
+  border-radius: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 </style>

@@ -5,7 +5,7 @@
       <Balance />
     </div>
     <div class="mdl-cell mdl-cell--12-col">
-      <h3>Make a claim</h3>
+      <h3>Request a bonus reward</h3>
       <Claims />
     </div>
     <div class="mdl-cell mdl-cell--12-col">

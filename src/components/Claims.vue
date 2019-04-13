@@ -1,12 +1,12 @@
 <template>
   <div class="mdl-grid">
-    <Claim title="Having a job" description="
-      Please upload your payment slip for validation. After successfull validation
+    <Claim img="job.png" class="mdl-cell--2-offset-desktop" title="I have a job" description="
+      Please upload your payment slip for validation. After successful validation
       you will receive €100.
     "/>
 
-    <Claim title="Moving to another house" description="
-      Please upload your payment slip for validation. After successfull validation
+    <Claim img="sold.png" title="I'm moving out" description="
+      Please upload your payment slip for validation. After successful validation
       your savings will be payed out.
     "/>
     <!-- <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-card mdl-shadow--2dp claim-card">
