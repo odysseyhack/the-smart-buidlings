@@ -29,7 +29,6 @@ function listenForTenantUpdates(callback) {
     if (!collectedData[tenant].outcomes) {
       collectedData[tenant].outcomes = [];
     }
-
     collectedData[tenant].outcomes.push({
       period: Number(period),
       choice: (instantCash > 0 ? 'cash' : 'savings')

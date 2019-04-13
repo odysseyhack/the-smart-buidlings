@@ -45,8 +45,8 @@ export default {
       let l = [];
       for (let i = 1; i < this.periodsNumber; i++) {
         let type = 'none' // 'savings', 'cash'
-        if (this.details.outcomes[i]) {
-          type = this.details.outcomes[i].choice
+        if (this.details.outcomesDict[i]) {
+          type = this.details.outcomesDict[i].choice
         }
         let text = 'No job confirmation'
         if (type == 'savings' || type == 'cash') {

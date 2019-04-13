@@ -10,22 +10,22 @@
 
     <tr class="transaction-el">
       <td>
-        <img v-if="details.type == 'saved'" src="../../public/pink-savings.png">
-        <img v-if="details.type == 'withdrawal'" src="../../public/Coins.png">
-        <img v-if="details.type == 'pending'" src="../../public/payslip.png">
+        <img v-if="details.type == 'savings'" src="../../public/pink-savings.png">
+        <img v-if="details.type == 'cash'" src="../../public/Coins.png">
+        <!-- <img v-if="details.type == 'pending'" src="../../public/payslip.png"> -->
       </td>
 
-      <td v-if="details.type == 'saved'">
+      <td v-if="details.type == 'savings'">
         Saved for deposit
       </td>
-      <td v-if="details.type == 'withdrawal'">
+      <td v-if="details.type == 'cash'">
         Withdrawal
       </td>
       <td v-if="details.type == 'pending'">
         Payslip submitted
       </td>
       <td> {{ date }} </td>
-      <td v-if="details.type != 'pending'" >{{ '€' + amount }}</td>
+      <td v-if="details.type != 'pending'" >{{ amount }}</td>
       <td v-if="details.type == 'pending'" >
         <span class="pending">
           PENDING
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import Periods from '../Periods.js'
+
 export default {
   name: "Transaction",
   props: {
@@ -49,16 +51,10 @@ export default {
   },
   computed: {
     amount () {
-      return this.details.amount + "GBP"
-    },
-    addedToSavings () {
-      return this.details.type == "AS"
-    },
-    when () {
-      return "January 2019"
+      return '€' + this.details.amount
     },
     date () {
-      return 'Jan 2019'
+      return Periods.toString(this.details.period)
     }
   }
 };

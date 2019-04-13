@@ -1,5 +1,29 @@
+function listenForHistoryEvents (cb) {
+  let events = [
+    {
+      period: 1,
+      choice: 'savings'
+    },
+    {
+      period: 2,
+      choice: 'cash'
+    }
+  ]
+  for (let event of events) {
+    // setTimeout(function () {
+    //   console.log('Calling cb')
+    //   console.log(event)
+    //   // event.q = Date.now()
+    //   cb(event)
+    // }, 5000)
+    cb(event)
+  }
+}
+
+
+import {pick} from 'lodash'
+import Vue from 'vue'
 import dialogPolyfill from 'dialog-polyfill';
-import { pick } from 'lodash';
 
 import { aggregateStats } from './AggregateStats';
 
@@ -14,10 +38,18 @@ let State = {
     stats: {
       tenants: {},
       numbers: {},
-    }
+    },
+    history: {}
+  },
+  startHistoryEventListening () {
+    let prevThis = this
+    listenForHistoryEvents(function (historyEvent) {
+      // prevThis.state.history[historyEvent.period] = historyEvent
+      Vue.set(prevThis.state.history, historyEvent.period, historyEvent)
+    })
   },
   startEventListening () {
-    let prevThis = this;
+    let prevThis = this
     // let numbers = this.numbers
     aggregateStats(function (update) {
       function getOutcomesDict (outcomeList) {
@@ -27,18 +59,21 @@ let State = {
         }
         return outcomesDict
       }
-
-      prevThis.state.stats.tenants[update.tenant.address] = update.tenant
-      prevThis.state.stats.tenants[update.tenant.address].outcomes =
-        getOutcomesDict(update.tenant.outcomes)
-
-      prevThis.state.stats.numbers = pick(update, [
+      // This hack makes an independent object copy
+      let newTenant = JSON.parse(JSON.stringify(update.tenant))
+      if (newTenant.outcomes && newTenant.outcomes.length > 0) {
+        newTenant.outcomesDict = getOutcomesDict(newTenant.outcomes)
+      } else {
+        newTenant.outcomesDict = {}
+      }
+      Vue.set(prevThis.state.stats.tenants, update.tenant.address, newTenant)
+      Vue.set(prevThis.state.stats, 'numbers', pick(update, [
         'jobsCreated',
         'currentlyEmployed',
         'avgTimeToIndependence',
         'nowIndependent',
         'avgTimeToFindJob'
-      ])
+      ]))
     })
   },
   showQuestionModalDialog (cb) {

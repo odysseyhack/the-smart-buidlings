@@ -22,6 +22,8 @@
 import State from '../State.js'
 import Transaction from './Transaction'
 
+State.startHistoryEventListening()
+
 export default {
   name: "TransactionHistory",
   data () {
@@ -29,23 +31,40 @@ export default {
       state: State.state,
       // TODO fetch transactions dynamically
       // Types : enum ['pending', 'withdrawal', 'saved', 'rejected']
-      transactions: [
-        {
-          timestamp: 1,
-          type: 'pending',
-          amount: 100
-        },
-        {
-          timestamp: 2,
-          type: 'saved',
-          amount: 1000
-        },
-        {
-          timestamp: 2,
-          type: 'withdrawal',
-          amount: 100
+      // transactions: [
+      //   {
+      //     timestamp: 1,
+      //     type: 'pending',
+      //     amount: 100
+      //   },
+      //   {
+      //     timestamp: 2,
+      //     type: 'saved',
+      //     amount: 1000
+      //   },
+      //   {
+      //     timestamp: 2,
+      //     type: 'withdrawal',
+      //     amount: 100
+      //   }
+      // ]
+    }
+  },
+  computed: {
+    transactions () {
+      let txs = Object.values(this.state.history)
+      let res = txs.map(function (tx) {
+        tx.type = tx.choice
+        if (tx.type == 'savings') {
+          tx.amount = 5
         }
-      ]
+        if (tx.type == 'cash') {
+          tx.amount = 4
+        }
+        return tx
+      })
+      console.log(res)
+      return res
     }
   },
   components: {
