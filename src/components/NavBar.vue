@@ -7,7 +7,7 @@
       <div class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Alice.sh</span>
+          <span class="mdl-layout-title">Building wallet with social curves</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications group="notifications" />
     <NavBar selected="onboard"/>
     <h5>Please provide eth address for a new tenant</h5>
     <input class="mdl-textfield__input" type="text" id="address" v-model="address">
@@ -26,6 +27,11 @@ export default {
   methods: {
     onboard () {
       Blockchain.onboard(this.address)
+      this.$notify({
+        group: 'notifications',
+        title: 'Onboarding transaction',
+        text: 'Please sign your transaction to onboard new tenant'
+      });
     }
   }
 }
@@ -34,9 +40,10 @@ export default {
 <style scoped>
   * {
     text-align: center;
-    margin-top: 40px;
   }
 
-
+  h5,input,button {
+    margin-top: 100px;
+  }
 
 </style>

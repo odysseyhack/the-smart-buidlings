@@ -2,13 +2,14 @@
   <div>
     <table>
       <StatsListElement
-        v-for="tenant in tenants"
-        v-bind:key="tenant.id"
+        v-for="tenant in tenantList"
+        v-bind:key="tenant.address"
         v-bind:start="start"
         v-bind:end="end"
         v-bind:details="tenant"
         periodsNumber="12"
       />
+      
     </table>
 
     <!-- Ruler should be hardcoded -->
@@ -26,34 +27,30 @@
 
 <script>
 import StatsListElement from './StatsListElement'
+import State from '../State.js'
+
+State.startEventListening()
 
 export default {
   data () {
     return {
       start: "Jan 2017",
       end: "Jan 2019",
-      tenants: [
-        {
-          id: 1,
-          something: '123'
-        },
-        {
-          id: 2,
-          something: '123'
-        },
-        {
-          id: 3,
-          something: '123'
-        },
-        {
-          id: 4,
-          something: '123'
-        }
-      ] 
+      state: State.state,
     }
   },
   components: {
     StatsListElement
+  },
+  computed: {
+    tenantList () {
+      let l = []
+      let counter = 1
+      for (let addr in this.state.stats.tenants) {
+        l.push(Object.assign(this.state.stats.tenants[addr], {id: counter++}))
+      }
+      return l
+    }
   },
   name: "StatsList",
 }

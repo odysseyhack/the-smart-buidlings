@@ -5,11 +5,15 @@ import Wallet from './views/Wallet.vue'
 import NotFound from './views/NotFound.vue'
 import OnBoard from './views/OnBoard.vue'
 import Stats from './views/Stats'
+// import VuetifyToast from 'vuetify-toast-snackbar'
+
+import Notifications from 'vue-notification'
 
 import Tooltip from 'vue-directive-tooltip';
 import 'vue-directive-tooltip/css/index.css';
 
 Vue.use(Tooltip);
+Vue.use(Notifications)
 
 Vue.config.productionTip = false
 
