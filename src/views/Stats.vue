@@ -9,6 +9,11 @@
 
 <script>
 import NavBar from '../components/NavBar.vue'
+import aggregateStats from '../AggregateStats.js'
+
+aggregateStats(tenant => {
+  console.log(tenant);
+});
 
 export default {
   name: 'app',

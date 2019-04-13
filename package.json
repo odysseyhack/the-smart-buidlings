@@ -10,6 +10,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "core-js": "^2.6.5",
+    "ethers": "^4.0.27",
     "openzeppelin-solidity": "^2.2.0",
     "truffle": "^5.0.12",
     "vue": "^2.6.6"

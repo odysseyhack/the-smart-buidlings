@@ -1,15 +1,16 @@
-import ethers from 'ethers';
+import { ethers } from 'ethers';
 
-import tokenContractJson from '../build/Token.json';
-import buildingContractJson from '../build/Building.json';
+import buildingContractJson from '../build/contracts/Building.json';
 
-const BUILDING_ADDRESS = '0xDEADBEEF';
-const FIRST_BLOCK = 4198878;
+// Ganache
+const BUILDING_ADDRESS = '0x7b6f9bE52C54f675DAF4529742aa0c4D85b9a0eF';
+const FIRST_BLOCK = 0;
 
-export default function*() {
+export default function(callback) {
+  console.log(ethers);
   let abi = buildingContractJson.abi;
   let web3Provider = new ethers.providers.Web3Provider(
-    web3.currentProvider, ethers.providers.networks.rinkeby);
+    web3.currentProvider);
 
   let contract = new ethers.Contract(BUILDING_ADDRESS, abi, web3Provider);
 
@@ -23,6 +24,7 @@ export default function*() {
     collectedData.tenant = {
       onboarding: Number(period),
     };
+    callback(collectedData.tenant);
   });
 
   contract.on(filterOutcomes, (tenant, period, instantCash, savingsBonus) => {
@@ -33,14 +35,15 @@ export default function*() {
       period,
       choice: (instantCash > 0 ? 'cash' : 'savings')
     });
+    callback(collectedData.tenant);
   });
 
   contract.on(filterGraduation, (tenant, period) => {
     collectedData.tenant.assign({
       graduation: Number(period),
     });
-    yield collectedData.tenant;
+    callback(collectedData.tenant);
   });
 
-  contract.resetEventsBlock(FIRST_BLOCK);
+  web3Provider.resetEventsBlock(FIRST_BLOCK);
 }

@@ -22,7 +22,6 @@ contract Building is Ownable {
 
   mapping(address => bool) isTenant;
   mapping(address => uint) tenantSavings;
-
   mapping(address => mapping(uint => bool)) wasOutcomeCompleted;
 
   event TenantEnrolled(address indexed tenant,
