@@ -6,7 +6,7 @@
       mdl-cell--12-col-phone
       stats-number
     ">
-      <h2>{{ numberText }}</h2>
+      <h2>{{ numberText | decimal }}</h2>
       <h5>{{ unit }}</h5>
       <p>{{ title }}</p>
       </div>
@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'StatsNumber',
   props: {
     number : Number,
     title: String,
@@ -22,13 +23,21 @@ export default {
   computed: {
     numberText: function() {
       if (this.$props.number !== null && this.$props.number !== undefined) {
-        return this.$props.number.toString();
+        return this.$props.number;
       } else {
         return '-';
       }
     }
   },
-  name: "StatsNumber",
+  filters: {
+    decimal: function(value) {
+      if (value != '-' && Math.floor(value) != value) {
+        return value.toFixed(2);
+      } else {
+        return value;
+      }
+    }
+  }
 }
 </script>
 
