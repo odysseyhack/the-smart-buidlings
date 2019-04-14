@@ -30,8 +30,12 @@
 
 <script>
 import Blockchain from '../Blockchain.js';
+import State from '../State.js';
 
-let data = { savings: null };
+let data = {
+  savings: null,
+  state: State.state,
+};
 
 let vm = {
   name: 'Balance',
@@ -40,7 +44,7 @@ let vm = {
   },
   computed: {
     rewards: function() {
-      return 3;
+      return Object.keys(this.state.history).length;
     }
   },
   methods: {
