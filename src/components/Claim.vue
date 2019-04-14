@@ -16,26 +16,58 @@
       {{ description }}
     </div>
 
-      <label class="fileContainer">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored claim-button">
+      <label v-if="displayButton || displayInactive" class="fileContainer">
+        <button
+          :disabled="displayInactive"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored claim-button">
           Claim
           <input type="file" ref="claimProofFiles" @change="fileLoaded" />
         </button>
       </label>
-  </div>
+      <div v-else-if="displayLoading">
+        <mdl-spinner></mdl-spinner>
+      </div>
+      <div v-else-if="displayCompleted">
+        <p style="font-weight: bold; margin-bottom: 0px">Bonus for the current month already received!</p>
+      </div>
+    </div>
 </template>
 
 <script>
 import State from '../State.js';
 
 export default {
-  data () {
+  data() {
     return {
       files: [],
       state: State.state,
     }
   },
+  computed: {
+    displayButton: function() {
+      return this.$props.currentStatus === 'free'
+        || (this.$props.currentStatus === 'validated' && this.$props.name !== 'job');
+    },
+
+    displayLoading: function() {
+      return this.$props.currentStatus === 'pending'
+        && (this.$props.pendingTx === this.$props.name);
+    },
+
+    displayInactive: function () {
+      return this.$props.currentStatus === 'pending'
+        && (this.$props.pendingTx !== this.$props.name);
+    },
+
+    displayCompleted: function() {
+      return this.$props.currentStatus === 'validated'
+        && (this.$props.name === 'job');
+    }
+  },
   props: {
+    name: String,
+    currentStatus: String,
+    pendingTx: String,
     title: String,
     description: String,
     img: String,

@@ -6,7 +6,10 @@
     </div>
     <div class="mdl-cell mdl-cell--12-col">
       <h3>Request a bonus reward</h3>
-      <Claims v-bind:currentStatus="currentStatus" />
+      <Claims
+        v-bind:pendingTx="pendingTx"
+        v-bind:currentStatus="currentStatus"
+        @transactionSent="setPending" />
     </div>
     <div class="mdl-cell mdl-cell--12-col">
       <TransactionHistory v-bind:currentStatus="currentStatus" v-bind:currentPeriod="currentPeriod" />
@@ -32,12 +35,15 @@ import State from '../State.js'
 
 import Blockchain from '../Blockchain.js';
 
+let data = {
+  state: State.state,
+  pendingTx: null,
+};
+
 export default {
   name: 'Wallet',
   data () {
-    return {
-      state: State.state,
-    }
+    return data;
   },
   props: {
     currentPeriod: Number
@@ -60,6 +66,11 @@ export default {
     },
     address: async function() {
       return await Blockchain.account();
+    }
+  },
+  methods: {
+    setPending(type) {
+      data.pendingTx = type;
     }
   },
   components: {

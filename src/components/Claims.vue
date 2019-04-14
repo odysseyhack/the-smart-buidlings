@@ -1,6 +1,9 @@
 <template>
   <div class="mdl-grid">
     <Claim
+      name="job"
+      v-bind:pendingTx="pendingTx"
+      v-bind:currentStatus="currentStatus"
       img="job.png"
       class="mdl-cell--2-offset-desktop"
       title="I have a job"
@@ -10,6 +13,9 @@
       @uploaded="handleJobClaim" />
 
     <Claim
+      name="move-out"
+      v-bind:pendingTx="pendingTx"
+      v-bind:currentStatus="currentStatus"
       img="sold.png"
       title="I'm moving out"
       description="
@@ -34,17 +40,20 @@ export default {
     Claim
   },
   props: {
-    currentStatus: String
+    currentStatus: String,
+    pendingTx: String,
   },
   methods: {
     handleJobClaim() {
-      this.state.showQuestionModalDialog(choice => {
-        Blockchain.claimReward(choice);
-      })
+      this.state.showQuestionModalDialog(async (choice) => {
+        await Blockchain.claimReward(choice);
+        this.$emit('transactionSent', 'job');
+      });
     },
 
-    handleMoveOutClaim() {
-      Blockchain.claimMoveOut();
+    async handleMoveOutClaim() {
+      await Blockchain.claimMoveOut();
+      this.$emit('transactionSent', 'moveOut');
     },
   },
   name: "Claims",
