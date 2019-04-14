@@ -44,7 +44,7 @@ function listenForTenantUpdates(callback) {
     console.log('graduation');
     if (!collectedData[tenant]) collectedData[tenant] = {};
 
-    collectedData[tenant].assign({
+    Object.assign(collectedData[tenant], {
       graduation: Number(period),
     });
 
