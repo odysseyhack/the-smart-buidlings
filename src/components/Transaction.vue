@@ -12,7 +12,7 @@
       <td>
         <img v-if="details.type == 'savings'" src="../../public/pink-savings.png">
         <img v-if="details.type == 'cash'" src="../../public/Coins.png">
-        <!-- <img v-if="details.type == 'pending'" src="../../public/payslip.png"> -->
+        <img v-if="details.type == 'pending'" src="../../public/payslip.png">
       </td>
 
       <td v-if="details.type == 'savings'">

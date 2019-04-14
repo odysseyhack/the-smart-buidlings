@@ -12,6 +12,7 @@
       mdl-cell--12-col-phone
       trasnaction-list">
       <table class="mdl-list">
+        <Transaction v-if="currentStatus == 'pending'" v-bind:details="{type: 'pending', period: currentPeriod}" />
         <Transaction v-for="transaction in transactions" v-bind:key="transaction.period" v-bind:details="transaction"/>
       </table>
     </div>
@@ -49,6 +50,10 @@ export default {
       //   }
       // ]
     }
+  },
+  props: {
+    currentStatus: String,
+    currentPeriod: Number
   },
   computed: {
     transactions () {

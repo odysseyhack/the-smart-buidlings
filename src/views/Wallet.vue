@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar selected="wallet"/>
-    <Wallet />
+    <Wallet v-bind:currentPeriod="currentPeriod" />
     <QuestionModalDialog />
   </div>
 </template>
@@ -10,6 +10,7 @@
 import NavBar from '../components/NavBar.vue'
 import Wallet from '../components/Wallet.vue'
 import QuestionModalDialog from '../components/QuestionModalDialog.vue'
+import Blockchain from '../Blockchain.js'
 
 export default {
   name: 'app',
@@ -17,6 +18,11 @@ export default {
     Wallet,
     NavBar,
     QuestionModalDialog
+  },
+  asyncComputed: {
+    async currentPeriod () {
+      return await Blockchain.getCurrentPeriod()
+    }
   }
 }
 </script>

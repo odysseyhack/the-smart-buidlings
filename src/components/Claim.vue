@@ -44,6 +44,7 @@ export default {
   methods: {
     fileLoaded () {
       this.files = this.$refs.claimProofFiles
+      State.updateFiles(this.files)
       // TODO
       this.showSpendingQuestion()
     },

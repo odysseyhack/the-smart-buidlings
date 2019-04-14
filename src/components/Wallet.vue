@@ -6,10 +6,10 @@
     </div>
     <div class="mdl-cell mdl-cell--12-col">
       <h3>Request a bonus reward</h3>
-      <Claims />
+      <Claims v-bind:currentStatus="currentStatus" />
     </div>
     <div class="mdl-cell mdl-cell--12-col">
-      <TransactionHistory />
+      <TransactionHistory v-bind:currentStatus="currentStatus" v-bind:currentPeriod="currentPeriod" />
     </div>
   </div>
   <div v-else-if="enabled === false">
@@ -28,11 +28,31 @@
 import Balance from './Balance.vue'
 import Claims from './Claims.vue'
 import TransactionHistory from './TransactionHistory.vue'
+import State from '../State.js'
 
 import Blockchain from '../Blockchain.js';
 
 export default {
   name: 'Wallet',
+  data () {
+    return {
+      state: State.state,
+    }
+  },
+  props: {
+    currentPeriod: Number
+  },
+  computed: {
+    currentStatus () {
+      if (this.state.history[this.currentPeriod]) {
+        return 'validated'
+      }
+      if (this.state.files) {
+        return 'pending'
+      }
+      return 'free'
+    }
+  },
   asyncComputed: {
     enabled: async function() {
       let address = await Blockchain.account();

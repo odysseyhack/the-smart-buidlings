@@ -24,6 +24,9 @@ export default {
   components: {
     Claim
   },
+  props: {
+    currentStatus: String
+  },
   name: "Claims",
 };
 </script>

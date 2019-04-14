@@ -16,7 +16,11 @@ let State = {
       tenants: {},
       numbers: {},
     },
-    history: {}
+    history: {},
+    files: null
+  },
+  updateFiles (files) {
+    Vue.set(this.state, 'files', files)
   },
   startHistoryEventListening () {
     let prevThis = this
