@@ -26,14 +26,10 @@
 </template>
 
 <script>
-import State from '../State.js'
-import Blockchain from '../Blockchain.js'
-
 export default {
   data () {
     return {
       files: [],
-      state: State
     }
   },
   props: {
@@ -46,12 +42,7 @@ export default {
       this.files = this.$refs.claimProofFiles
       State.updateFiles(this.files)
       // TODO
-      this.showSpendingQuestion()
-    },
-    showSpendingQuestion () {
-      this.state.showQuestionModalDialog(function (choice) {
-        Blockchain.claim(choice)
-      })
+      this.$emit('uploaded');
     },
     getImgUrl () {
       return require('../../public/' + this.img);

@@ -7,7 +7,7 @@ const SPENDING_TYPE = {
   savings: 1
 }
 
-const BUILDING_ADDRESS = '0xe0A5f42f3734e70DfAC74D38A29231EFDf95940A';
+const BUILDING_ADDRESS = '0x5Fd397277E5e71dbd5627a8faDaeA8b6A583bB4B';
 const PERIOD_LENGTH = 1800;
 
 window.ethereum.enable();
@@ -18,12 +18,16 @@ const signer = provider.getSigner();
 export default {
   provider,
 
-  async claim(choice) {
+  async claimReward(choice) {
     if (SPENDING_TYPE[choice] === undefined) {
       throw new Error(`Unknown reward "${choice}"`);
     }
     await this.contract().claimOutcome(
       await this.getCurrentPeriod(), SPENDING_TYPE[choice], { gasLimit: 2000000 });
+  },
+
+  async claimMoveOut() {
+    await this.contract().cashOut();
   },
 
   async onboard(address) {
