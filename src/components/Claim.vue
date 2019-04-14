@@ -41,7 +41,11 @@ export default {
     fileLoaded () {
       this.files = this.$refs.claimProofFiles
       State.updateFiles(this.files)
-      // TODO
+      this.$notify({
+        group: 'notifications',
+        title: 'File uploaded!',
+        text: 'The validator will review your claim'
+      });
       this.$emit('uploaded');
     },
     getImgUrl () {
