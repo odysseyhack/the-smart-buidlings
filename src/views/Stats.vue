@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <NavBar selected="stats"/>
+    <!-- MDL Progress Bar with Indeterminate Progress -->
+    <div id="p2" v-if="!state.stats.numbers.jobsCreated" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     <div id="chart">
       <StatsNumbers />
       <StatsList />
@@ -10,6 +12,7 @@
 
 <script>
 import NavBar from '../components/NavBar.vue'
+import State from '../State.js'
 // import aggregateStats from '../AggregateStats.js'
 
 // aggregateStats(tenant => {
@@ -20,6 +23,11 @@ import StatsList from '../components/StatsList.vue'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      state: State.state
+    }
+  },
   components: {
     NavBar,
     StatsNumbers,
@@ -29,6 +37,10 @@ export default {
 </script>
 
 <style scoped>
+  #p2 {
+    width:100vw;
+  }
+
   * {
     text-align: center;
   }
