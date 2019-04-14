@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications group="notifications" />
     <NavBar selected="wallet"/>
     <Wallet v-bind:currentPeriod="currentPeriod" />
     <QuestionModalDialog />
