@@ -21,7 +21,7 @@ tenants find work"/>
     <StatsNumber
       v-bind:number="state.stats.numbers.savingsRate"
       unit="percent"
-      title="Number of rewards taken in savings" />
+      title="Percentage of rewards taken in savings" />
 
   </div>
 </template>
