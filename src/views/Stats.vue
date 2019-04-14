@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar selected="stats"/>
     <!-- MDL Progress Bar with Indeterminate Progress -->
-    <div id="p2" v-if="!state.stats.numbers.jobsCreated" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    <div id="p2" v-if="state.stats.numbers.jobsCreated == null" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     <div id="chart">
       <StatsNumbers />
       <StatsList />

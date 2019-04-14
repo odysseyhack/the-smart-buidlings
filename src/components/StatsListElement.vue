@@ -11,7 +11,6 @@
           claimCellSaved: claimCell.type == 'savings',
           claimCellCash:  claimCell.type == 'cash'
           }"
-          v-tooltip="claimCell.text"
           >
         </div>
         <!-- {{ claimCell.type }} -->
@@ -20,7 +19,7 @@
     <tr>
       <td v-for="livedCell in livingsOnPeriods" v-bind:key="livedCell.period">
         <!-- {{ livedCell.lived }} -->
-        <div v-tooltip="'living'" v-bind:class="{
+        <div v-bind:class="{
           cell: true,
           livedCell: true,
           livedCellFilled: livedCell.lived
