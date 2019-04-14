@@ -40,7 +40,7 @@ export default {
     transactions () {
       let txs = Object.values(this.state.history)
       txs.sort(function (tx1, tx2) {
-        return tx1.period > tx2.period
+        return tx1.period < tx2.period
       })
       let res = txs.map(function (tx) {
         tx.type = tx.choice
