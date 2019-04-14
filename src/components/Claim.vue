@@ -26,10 +26,13 @@
 </template>
 
 <script>
+import State from '../State.js';
+
 export default {
   data () {
     return {
       files: [],
+      state: State.state,
     }
   },
   props: {
