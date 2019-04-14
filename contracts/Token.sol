@@ -7,7 +7,7 @@ import 'openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol';
 contract Token is ERC20, ERC20Detailed, ERC20Mintable {
   constructor()
     ERC20Mintable()
-    ERC20Detailed('Alice Housing Token', 'AHT', 18)
+    ERC20Detailed('Homelink Token', 'HLT', 0)
     ERC20()
     public
   { }
