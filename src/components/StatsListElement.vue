@@ -1,7 +1,7 @@
 <template>
   <tbody>
     <tr>
-      <td rowspan="2">
+      <td width="50px" class="circle-td" rowspan="2">
         <div class="circled">{{ details.id }}</div>
       </td>
       <td v-for="claimCell in claimsOnPeriods" v-bind:key="claimCell.period">
@@ -37,12 +37,12 @@ export default {
     details: Object,
     start: String,
     end: String,
-    periodsNumber: Number
+    currentPeriod: Number
   },
   computed: {
     claimsOnPeriods () {
       let l = [];
-      for (let i = 0; i <= this.periodsNumber; i++) {
+      for (let i = 0; i <= this.currentPeriod; i++) {
         let type = 'none' // 'savings', 'cash'
         if (this.details.outcomesDict[i]) {
           type = this.details.outcomesDict[i].choice
@@ -63,7 +63,7 @@ export default {
     },
     livingsOnPeriods () {
       let l = [];
-      for (let i = 0; i <= this.periodsNumber; i++) {
+      for (let i = 0; i <= this.currentPeriod; i++) {
         l.push({
           period: i,
           lived: this.details.onboarding <= i && !(this.details.graduated < i)
@@ -83,7 +83,7 @@ export default {
   td {
     /* border: 1px solid; */
     padding: 0;
-    width: 4vw;
+    /* width: 4vw; */
   }
   .circled {
     font-size: 20px;
@@ -94,6 +94,7 @@ export default {
     text-align: center;
     border-radius: 50%;
     background: lightseagreen;
+    margin-right: 10px;
   }
 
   .livedCell {
@@ -123,5 +124,10 @@ export default {
     cursor: pointer;
     width: 100%;
     height: 10px;
+  }
+
+  .circle-td {
+    width: 1vw;
+    margin: auto;
   }
 </style>

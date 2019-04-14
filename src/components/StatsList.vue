@@ -7,20 +7,17 @@
         v-bind:start="start"
         v-bind:end="end"
         v-bind:details="tenant"
-        v-bind:periodsNumber="periodsNumber"
+        v-bind:currentPeriod="currentPeriod"
       />
+
+      <tr>
+        <td></td>
+        <td v-for="pDate in listOfPeriodsBefore(currentPeriod)" v-bind:key="pDate">
+          {{ pDate }}
+        </td>
+      </tr>
       
     </table>
-
-    <!-- Ruler should be hardcoded -->
-    <span class="ruler-label">Jan 2016</span>
-    <span class="ruler-label">Jul 2016</span>
-    <span class="ruler-label">Jan 2017</span>
-    <span class="ruler-label">Jul 2017</span>
-    <span class="ruler-label">Jan 2018</span>
-    <span class="ruler-label">Jul 2018</span>
-    <span class="ruler-label">Jan 2019</span>
-    <span class="ruler-label">Now</span>
   </div>
 
 </template>
@@ -29,6 +26,7 @@
 import StatsListElement from './StatsListElement'
 import State from '../State.js'
 import Blockchain from '../Blockchain.js'
+import Periods from '../Periods.js'
 
 State.startEventListening()
 
@@ -54,10 +52,19 @@ export default {
     }
   },
   asyncComputed: {
-    async periodsNumber () {
+    async currentPeriod () {
       let res = await Blockchain.getCurrentPeriod()
       console.log('Periods on chart:' + res)
       return res
+    }
+  },
+  methods: {
+    listOfPeriodsBefore (currentPeriod) {
+      let pDates = []
+      for (let p = 0; p <=currentPeriod; p++) {
+        pDates.push(Periods.toString(p))
+      }
+      return pDates
     }
   },
   name: "StatsList",
