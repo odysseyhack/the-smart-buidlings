@@ -2,7 +2,7 @@
   <dialog class="mdl-dialog question-dialog">
     <h3>How would you like to be rewarded?</h3>
     <p class="maindesc">
-      You can either cash in your bonus reward for €200 now, or you can choose to save it and get €300 towards your deposit.
+      You can either cash in your bonus reward for €40 now, or you can choose to save it and get €50 towards your deposit.
     </p>
     <table>
       <tr id="table-row">
@@ -11,7 +11,7 @@
             <!-- Add 200GBP to savings -->
             <img class="choice-image" src="../../public/save-icon.png" width="71px" height="60px">
             <p class="caption">
-              Add €300 to deposit savings
+              Add €50 to deposit savings
             </p>
           </div>
         </td>
@@ -19,7 +19,7 @@
           <div @click="choose('cash')" class="choice-button" id="payout-choice">
             <img class="choice-image" src="../../public/cash.png" width="71px" height="60px">
             <p class="caption">
-              Withdraw €200 as cash now
+              Withdraw €40 as cash now
             </p>
           </div>
         </td>

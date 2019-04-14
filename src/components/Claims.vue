@@ -6,14 +6,14 @@
       title="I have a job"
       description="
       Please upload your payment slip for validation. After successful validation
-      you will receive €100."
+      you will receive up to €50."
       @uploaded="handleJobClaim" />
 
     <Claim
       img="sold.png"
       title="I'm moving out"
       description="
-      Please upload your payment slip for validation. After successful validation
+      Please upload your lease agreement for validation. After successful validation
       your savings will be payed out."
       @uploaded="handleMoveOutClaim" />
   </div>
