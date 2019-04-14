@@ -81,7 +81,6 @@ export default {
     padding: 0;
   }
   td {
-    /* border: 1px solid; */
     padding: 0;
     /* width: 4vw; */
   }
@@ -101,21 +100,26 @@ export default {
     background: white;
     position: relative;
     bottom: 9px;
+    border-radius: 3px;
+    height: 80px;
   }
 
   .livedCellFilled {
     background: lightseagreen;
     position: relative;
     bottom: 9px;
+    border-radius: 3px;
   }
 
   .claimCell {
     position: relative;
     top: 9px;
+    border-radius: 3px;
   }
 
   .claimCellSaved {
     background: lightgreen;
+    border-radius: 3px;
     /* position: absolute; */
     /* bottom: 0px; */
   }
@@ -130,4 +134,5 @@ export default {
     width: 1vw;
     margin: auto;
   }
+
 </style>
