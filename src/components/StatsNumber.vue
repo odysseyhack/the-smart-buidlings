@@ -7,7 +7,7 @@
       stats-number
     ">
 
-      <h2>{{ number | decimal }}</h2>
+      <h2>{{ numberText | decimal }}</h2>
       <p class="narrow">{{ title }}</p>
       </div>
 </template>
