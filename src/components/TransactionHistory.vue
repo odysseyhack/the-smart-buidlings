@@ -30,25 +30,6 @@ export default {
   data () {
     return {
       state: State.state,
-      // TODO fetch transactions dynamically
-      // Types : enum ['pending', 'withdrawal', 'saved', 'rejected']
-      // transactions: [
-      //   {
-      //     timestamp: 1,
-      //     type: 'pending',
-      //     amount: 100
-      //   },
-      //   {
-      //     timestamp: 2,
-      //     type: 'saved',
-      //     amount: 1000
-      //   },
-      //   {
-      //     timestamp: 2,
-      //     type: 'withdrawal',
-      //     amount: 100
-      //   }
-      // ]
     }
   },
   props: {

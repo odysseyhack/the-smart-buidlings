@@ -1,7 +1,6 @@
 <template>
   <!-- Always shows a header, even in smaller screens. -->
   <div id="nav-bar">
-    <!-- TODO fix behaviour for mobile -->
     <!-- <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
     <div class="mdl-layout mdl-layout--fixed-header">
       <div class="mdl-layout__header navbarcolour">
