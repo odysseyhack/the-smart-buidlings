@@ -13,7 +13,7 @@ contract Building is Ownable {
     SAVINGS_BONUS
   }
 
-  uint public SECONDS_IN_PERIOD = 1800;
+  uint public SECONDS_IN_PERIOD = 600;
 
   Token token;
   uint instantCashAmount;

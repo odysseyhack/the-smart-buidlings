@@ -7,8 +7,8 @@ const SPENDING_TYPE = {
   savings: 1
 }
 
-const BUILDING_ADDRESS = '0xc43fd9C6d512AeC00030DB87446b4eAFd9660f60';
-const PERIOD_LENGTH = 1800;
+const BUILDING_ADDRESS = '0x0340eFBa09c1D4655d0ABEb2D2d92aD356D7F56C';
+const PERIOD_LENGTH = 600;
 
 window.ethereum.enable();
 
