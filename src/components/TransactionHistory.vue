@@ -61,10 +61,10 @@ export default {
       let res = txs.map(function (tx) {
         tx.type = tx.choice
         if (tx.type == 'savings') {
-          tx.amount = 5
+          tx.amount = 300
         }
         if (tx.type == 'cash') {
-          tx.amount = 4
+          tx.amount = 200
         }
         return tx
       })

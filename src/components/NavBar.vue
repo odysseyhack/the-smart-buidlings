@@ -7,7 +7,7 @@
       <div class="mdl-layout__header navbarcolour">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Homelink</span>
+          <span class="mdl-layout-title"><img class="logo" src="../../public/logo.svg" height="48px"/>Homelink</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
@@ -67,12 +67,16 @@ export default {
 
 <style scoped>
 .selected {
- text-decoration: underline;
+ font-weight: 500 !important;
+ color: #FFF;
+ opacity: 1;
+ background-color: #1c587a;
 }
 
 .mdl-navigation__link {
   font-size: 16px;
   letter-spacing: 0.5px;
+  font-weight:300;
 }
 
 .mdl-navigation__link:hover {
@@ -82,5 +86,9 @@ export default {
 
 .navbarcolour {
  background-color: #184E6D !important;
+}
+
+.logo {
+  padding-right: 15px;
 }
 </style>

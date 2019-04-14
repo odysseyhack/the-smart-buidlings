@@ -88,6 +88,7 @@ export default {
     height: 36px;
     margin-top: 6px;
     text-transform: none;
+    background-color: #184E6D;
 }
 
 .claim-button:hover {

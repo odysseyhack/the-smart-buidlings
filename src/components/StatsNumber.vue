@@ -6,9 +6,9 @@
       mdl-cell--12-col-phone
       stats-number
     ">
-      <h2>{{ numberText | decimal }}</h2>
-      <h5>{{ unit }}</h5>
-      <p>{{ title }}</p>
+
+      <h2>{{ number | decimal }}</h2>
+      <p class="narrow">{{ title }}</p>
       </div>
 </template>
 
@@ -42,4 +42,15 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 5px;
+}
+p {
+  color: #BBCED9;
+  font-weight: 400;
+  width: 200px;
+  margin: auto;
+  line-height: 1.35;
+}
+
 </style>

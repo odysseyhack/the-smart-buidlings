@@ -5,7 +5,7 @@
     <div id="p2" v-if="state.stats.numbers.jobsCreated == null" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     <div id="chart">
       <StatsNumbers />
-      <StatsList />
+      <StatsList class="test"/>
     </div>
   </div>
 </template>
@@ -51,5 +51,9 @@ export default {
     width: 1400px;
     min-width: 70vw;
     max-width: 90vw;
+  }
+
+  .test {
+  padding-top:100px;
   }
 </style>

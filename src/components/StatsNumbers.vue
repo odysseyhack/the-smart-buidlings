@@ -2,28 +2,27 @@
   <div class="mdl-grid">
     <StatsNumber
       v-bind:number="state.stats.numbers.jobsCreated"
-      unit="jobs"
-      title="Jobs created" />
+      title="Number of jobs created" />
     <StatsNumber
       v-bind:number="state.stats.numbers.nowIndependent"
-      unit="people"
-      title="Now independent" />
+      title="Tenants successfully
+moved on" />
     <StatsNumber
       v-bind:number="state.stats.numbers.currentlyEmployed"
-      unit="people"
-      title="Currently employed" />
+      title="Current tenants
+employed" />
     <StatsNumber
       v-bind:number="state.stats.numbers.avgTimeToFindJob"
-      unit="months"
-      title="Avg time to find job"/>
+      title="Avg. months until
+tenants find work"/>
     <StatsNumber
       v-bind:number="state.stats.numbers.avgTimeToIndependence"
-      unit="months"
-      title="Avg time be independent" />
+      title="Avg. months until tenants move on" />
     <StatsNumber
       v-bind:number="state.stats.numbers.savingsRate"
       unit="percent"
-      title="Saving instead of cashing" />
+      title="Number of rewards taken in savings" />
+
   </div>
 </template>
 
