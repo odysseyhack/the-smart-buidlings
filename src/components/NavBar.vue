@@ -26,7 +26,7 @@
               class="mdl-navigation__link"
               v-bind:class="{selected: selected == 'stats'}"
               href="/stats"
-            >Stats</a>
+            >Explore</a>
             <a
               class="mdl-navigation__link"
               v-bind:class="{selected: selected == 'onboard'}"
