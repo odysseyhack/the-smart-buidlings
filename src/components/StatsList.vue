@@ -56,8 +56,7 @@ export default {
   asyncComputed: {
     async periodsNumber () {
       let res = await Blockchain.getCurrentPeriod()
-      console.log('Res:' + res)
-      res = 10
+      console.log('Periods on chart:' + res)
       return res
     }
   },
